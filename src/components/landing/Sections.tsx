@@ -6,12 +6,20 @@ import p3Asset from "@/assets/portfolio-3.jpg.asset.json";
 import p4Asset from "@/assets/portfolio-4.jpg.asset.json";
 import p5Asset from "@/assets/portfolio-5.jpg.asset.json";
 import p6Asset from "@/assets/portfolio-6.jpg.asset.json";
+import a1Asset from "@/assets/avatar-1.jpg.asset.json";
+import a2Asset from "@/assets/avatar-2.jpg.asset.json";
+import a3Asset from "@/assets/avatar-3.jpg.asset.json";
+import a4Asset from "@/assets/avatar-4.jpg.asset.json";
 const p1 = p1Asset as { url: string };
 const p2 = p2Asset as { url: string };
 const p3 = p3Asset as { url: string };
 const p4 = p4Asset as { url: string };
 const p5 = p5Asset as { url: string };
 const p6 = p6Asset as { url: string };
+const a1 = a1Asset as { url: string };
+const a2 = a2Asset as { url: string };
+const a3 = a3Asset as { url: string };
+const a4 = a4Asset as { url: string };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -201,10 +209,10 @@ export function Portfolio() {
 export function Testimonials() {
   const { t } = useI18n();
   const items = [
-    { name: "Amine B.", biz: "Boutique Casablanca", rating: 5, review: "Site livré rapidement, design premium. Notre chiffre d'affaires a doublé en 3 mois." },
-    { name: "Sofia R.", biz: "Studio Barcelona", rating: 5, review: "Equipo increíble. Nos ayudaron a lanzar campañas que realmente convierten." },
-    { name: "James O.", biz: "Growth Startup", rating: 5, review: "Truly premium execution. Our new site loads instantly and looks world-class." },
-    { name: "Youssef T.", biz: "Restaurant Rabat", rating: 5, review: "Support professionnel du début à la fin, je recommande à 100%." },
+    { name: "Amine B.", biz: "Boutique Casablanca", avatar: a1.url, rating: 5, review: "Site livré rapidement, design premium. Notre chiffre d'affaires a doublé en 3 mois." },
+    { name: "Sofia R.", biz: "Studio Barcelona", avatar: a2.url, rating: 5, review: "Equipo increíble. Nos ayudaron a lanzar campañas que realmente convierten." },
+    { name: "James O.", biz: "Growth Startup", avatar: a3.url, rating: 5, review: "Truly premium execution. Our new site loads instantly and looks world-class." },
+    { name: "Youssef T.", biz: "Restaurant Rabat", avatar: a4.url, rating: 5, review: "Support professionnel du début à la fin, je recommande à 100%." },
   ];
   return (
     <Section id="testimonials" eyebrow={t("testimonials.eyebrow")} title={t("testimonials.title")}>
@@ -219,9 +227,14 @@ export function Testimonials() {
             className="glass rounded-3xl p-8 shadow-lg"
           >
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)] font-bold text-white">
-                {it.name.charAt(0)}
-              </div>
+              <img
+                src={it.avatar}
+                alt={it.name}
+                loading="lazy"
+                width={512}
+                height={512}
+                className="h-12 w-12 rounded-full object-cover ring-2 ring-white/10"
+              />
               <div>
                 <div className="font-semibold">{it.name}</div>
                 <div className="text-xs text-muted-foreground">{it.biz}</div>
