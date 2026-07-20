@@ -83,9 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "HZELFY ADI est une agence digitale premium : sites web performants, publicité digitale et stratégies de croissance. Discutons de votre projet sur WhatsApp." },
       { name: "author", content: "HZELFY ADI" },
       { property: "og:title", content: "HZELFY ADI — Sites web modernes & marketing digital" },
-      { property: "og:description", content: "Agence digitale premium : sites web, publicité et croissance." },
+      { property: "og:description", content: "HZELFY ADI est une agence digitale premium : sites web performants, publicité digitale et stratégies de croissance. Discutons de votre projet sur WhatsApp." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "HZELFY ADI — Sites web modernes & marketing digital" },
+      { name: "twitter:description", content: "HZELFY ADI est une agence digitale premium : sites web performants, publicité digitale et stratégies de croissance. Discutons de votre projet sur WhatsApp." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/80cbc1fe-0709-4cf7-bbc7-e7ceb99e2616/id-preview-b88e4dad--ec3f120d-a921-4de7-a9b5-e37d08fe2e97.lovable.app-1784572047340.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/80cbc1fe-0709-4cf7-bbc7-e7ceb99e2616/id-preview-b88e4dad--ec3f120d-a921-4de7-a9b5-e37d08fe2e97.lovable.app-1784572047340.png" },
     ],
     links: [
       {
