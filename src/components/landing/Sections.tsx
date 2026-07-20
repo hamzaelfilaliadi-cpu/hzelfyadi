@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useI18n, WHATSAPP_URL } from "@/lib/i18n";
-import p1 from "@/assets/portfolio-1.jpg.asset.json";
-import p2 from "@/assets/portfolio-2.jpg.asset.json";
-import p3 from "@/assets/portfolio-3.jpg.asset.json";
-import p4 from "@/assets/portfolio-4.jpg.asset.json";
-import p5 from "@/assets/portfolio-5.jpg.asset.json";
-import p6 from "@/assets/portfolio-6.jpg.asset.json";
+import p1 from "@/assets/portfolio-1.jpg.asset.json" with { type: "json" };
+import p2 from "@/assets/portfolio-2.jpg.asset.json" with { type: "json" };
+import p3 from "@/assets/portfolio-3.jpg.asset.json" with { type: "json" };
+import p4 from "@/assets/portfolio-4.jpg.asset.json" with { type: "json" };
+import p5 from "@/assets/portfolio-5.jpg.asset.json" with { type: "json" };
+import p6 from "@/assets/portfolio-6.jpg.asset.json" with { type: "json" };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
