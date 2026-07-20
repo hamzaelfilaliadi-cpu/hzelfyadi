@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useI18n, WHATSAPP_URL } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Nav() {
   const { t } = useI18n();
@@ -30,6 +31,7 @@ export function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSwitcher />
           <a
             href={WHATSAPP_URL}
