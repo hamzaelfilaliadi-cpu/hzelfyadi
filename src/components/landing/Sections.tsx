@@ -142,18 +142,18 @@ export function Process() {
 
 export function Portfolio() {
   const { t } = useI18n();
-  const gradients = [
-    "from-blue-500/40 to-cyan-400/30",
-    "from-amber-400/40 to-rose-400/30",
-    "from-cyan-400/40 to-indigo-500/30",
-    "from-violet-500/40 to-fuchsia-400/30",
-    "from-emerald-400/40 to-cyan-500/30",
-    "from-orange-400/40 to-pink-500/30",
+  const projects: { image: string; label: string; tag: string }[] = [
+    { image: p1.url, label: "Fashion Store", tag: "E-commerce" },
+    { image: p2.url, label: "Gourmet Restaurant", tag: "Hospitality" },
+    { image: p3.url, label: "SaaS Platform", tag: "Startup" },
+    { image: p4.url, label: "Real Estate", tag: "Properties" },
+    { image: p5.url, label: "Creative Agency", tag: "Branding" },
+    { image: p6.url, label: "Fitness Club", tag: "Sport" },
   ];
   return (
     <Section id="portfolio" eyebrow={t("portfolio.eyebrow")} title={t("portfolio.title")}>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {gradients.map((g, i) => (
+        {projects.map((p, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 24 }}
@@ -162,12 +162,22 @@ export function Portfolio() {
             transition={{ duration: 0.5, delay: i * 0.06 }}
             whileHover={{ y: -6, rotateX: 4, rotateY: -4 }}
             style={{ transformPerspective: 900 }}
-            className={`glass relative aspect-[4/3] overflow-hidden rounded-3xl p-6 shadow-xl`}
+            className="glass group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl"
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${g}`} />
-            <div className="relative flex h-full flex-col justify-end">
-              <div className="text-xs text-muted-foreground">0{i + 1}</div>
-              <div className="text-xl font-semibold">{t("portfolio.item")} 0{i + 1}</div>
+            <img
+              src={p.image}
+              alt={`${p.label} website preview`}
+              loading="lazy"
+              width={1024}
+              height={1024}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="relative flex h-full flex-col justify-end p-6 text-white">
+              <div className="text-xs uppercase tracking-widest text-white/70">
+                {p.tag} · 0{i + 1}
+              </div>
+              <div className="text-xl font-semibold">{p.label}</div>
             </div>
           </motion.div>
         ))}
