@@ -10,6 +10,12 @@ import a1Asset from "@/assets/avatar-1.jpg.asset.json";
 import a2Asset from "@/assets/avatar-2.jpg.asset.json";
 import a3Asset from "@/assets/avatar-3.jpg.asset.json";
 import a4Asset from "@/assets/avatar-4.jpg.asset.json";
+import pr1Asset from "@/assets/process-1.jpg.asset.json";
+import pr2Asset from "@/assets/process-2.jpg.asset.json";
+import pr3Asset from "@/assets/process-3.jpg.asset.json";
+import pr4Asset from "@/assets/process-4.jpg.asset.json";
+import pr5Asset from "@/assets/process-5.jpg.asset.json";
+import pr6Asset from "@/assets/process-6.jpg.asset.json";
 const p1 = p1Asset as { url: string };
 const p2 = p2Asset as { url: string };
 const p3 = p3Asset as { url: string };
@@ -20,6 +26,7 @@ const a1 = a1Asset as { url: string };
 const a2 = a2Asset as { url: string };
 const a3 = a3Asset as { url: string };
 const a4 = a4Asset as { url: string };
+const processImgs = [pr1Asset, pr2Asset, pr3Asset, pr4Asset, pr5Asset, pr6Asset] as { url: string }[];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -137,23 +144,56 @@ export function Process() {
   return (
     <Section id="process" eyebrow={t("process.eyebrow")} title={t("process.title")}>
       <div className="relative">
-        <div className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" />
-        <div className="grid gap-6 md:grid-cols-6">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative text-center"
-            >
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-lg shadow-primary/30">
-                {i + 1}
+        <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent md:block" />
+        <div className="flex flex-col gap-16 md:gap-24">
+          {steps.map((s, i) => {
+            const fromLeft = i % 2 === 0;
+            return (
+              <div
+                key={s}
+                className={`relative grid items-center gap-8 md:grid-cols-2 md:gap-12 ${
+                  fromLeft ? "" : "md:[&>*:first-child]:order-2"
+                }`}
+              >
+                <motion.div
+                  initial={{ opacity: 0, x: fromLeft ? -80 : 80, rotate: fromLeft ? -4 : 4 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  whileHover={{ y: -6, rotate: fromLeft ? -1 : 1 }}
+                  className="glass relative aspect-[4/3] overflow-hidden rounded-3xl p-4 shadow-xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-primary)]/10 via-transparent to-[color:var(--brand-secondary)]/10" />
+                  <img
+                    src={processImgs[i].url}
+                    alt={s}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="relative h-full w-full object-contain"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: fromLeft ? 80 : -80 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                  className={`flex flex-col ${fromLeft ? "md:items-start md:text-left" : "md:items-end md:text-right"} items-start text-left`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-lg font-bold text-primary-foreground shadow-lg shadow-primary/30">
+                      0{i + 1}
+                    </div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-secondary)]">
+                      Step {i + 1}
+                    </div>
+                  </div>
+                  <h3 className="mt-5 text-2xl font-semibold sm:text-3xl">{s}</h3>
+                  <div className="mt-3 h-px w-16 bg-gradient-to-r from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)]" />
+                </motion.div>
               </div>
-              <div className="mt-4 text-sm font-medium">{s}</div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </Section>
