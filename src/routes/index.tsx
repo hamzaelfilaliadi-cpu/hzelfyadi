@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/landing/Nav";
 import { Hero } from "@/components/landing/Hero";
-import { Services, WhyUs, Process, Portfolio, Testimonials, Stats, CTA, Footer } from "@/components/landing/Sections";
+import { Services, WhyUs, Process, Portfolio, Stats, CTA, Footer } from "@/components/landing/Sections";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +22,6 @@ function Index() {
         <WhyUs />
         <Process />
         <Portfolio />
-        <Testimonials />
         <Stats />
         <CTA />
       </main>
