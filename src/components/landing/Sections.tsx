@@ -1,4 +1,8 @@
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  Rocket, ShieldCheck, Sparkles, Zap, Target, Trophy, Clock, HeartHandshake,
+} from "lucide-react";
 import { useI18n, WHATSAPP_URL } from "@/lib/i18n";
 import p1Asset from "@/assets/portfolio-1.jpg.asset.json";
 import p2Asset from "@/assets/portfolio-2.jpg.asset.json";
@@ -100,26 +104,34 @@ export function Services() {
 
 export function WhyUs() {
   const { t } = useI18n();
+  const icons = [Rocket, ShieldCheck, Sparkles, Zap, Target, Trophy, Clock, HeartHandshake];
   const items = [
     t("why.1"), t("why.2"), t("why.3"), t("why.4"),
     t("why.5"), t("why.6"), t("why.7"), t("why.8"),
-  ];
+  ].map((label, i) => ({ label, Icon: icons[i] }));
   return (
     <Section id="why" eyebrow={t("why.eyebrow")} title={t("why.title")}>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((label, i) => (
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(({ label, Icon }, i) => (
           <motion.div
             key={label}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.05 }}
-            className="glass rounded-2xl p-5"
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: i * 0.06 }}
+            whileHover={{ y: -8, rotateX: 4, rotateY: -4 }}
+            style={{ transformPerspective: 900 }}
+            className="group glass relative overflow-hidden rounded-3xl p-6"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--brand-accent)]/15 text-[color:var(--brand-accent)]">
-              ✓
+            <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-[color:var(--brand-primary)]/30 to-[color:var(--brand-secondary)]/20 blur-2xl opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="pointer-events-none absolute right-3 top-3 text-4xl font-black tracking-tight text-white/5">
+              0{i + 1}
             </div>
-            <div className="mt-4 text-sm font-semibold">{label}</div>
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)] text-white shadow-lg shadow-primary/30">
+              <Icon className="h-6 w-6" strokeWidth={2.2} />
+            </div>
+            <div className="relative mt-5 text-sm font-semibold leading-snug">{label}</div>
+            <div className="mt-4 h-px w-10 bg-gradient-to-r from-[color:var(--brand-primary)] to-transparent transition-all duration-500 group-hover:w-20" />
           </motion.div>
         ))}
       </div>
@@ -133,62 +145,112 @@ export function Process() {
     t("process.1"), t("process.2"), t("process.3"),
     t("process.4"), t("process.5"), t("process.6"),
   ];
+  const [active, setActive] = useState(0);
   return (
     <Section id="process" eyebrow={t("process.eyebrow")} title={t("process.title")}>
-      <div className="relative">
-        <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent md:block" />
-        <div className="flex flex-col gap-16 md:gap-24">
-          {steps.map((s, i) => {
-            const fromLeft = i % 2 === 0;
-            return (
-              <div
-                key={s}
-                className={`relative grid items-center gap-8 md:grid-cols-2 md:gap-12 ${
-                  fromLeft ? "" : "md:[&>*:first-child]:order-2"
-                }`}
-              >
-                <motion.div
-                  initial={{ opacity: 0, x: fromLeft ? -80 : 80, rotate: fromLeft ? -4 : 4 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  whileHover={{ y: -6, rotate: fromLeft ? -1 : 1 }}
-                  className="glass relative aspect-[4/3] overflow-hidden rounded-3xl p-4 shadow-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-primary)]/10 via-transparent to-[color:var(--brand-secondary)]/10" />
-                  <img
-                    src={processImgs[i].url}
-                    alt={s}
-                    loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="relative h-full w-full object-contain"
-                  />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: fromLeft ? 80 : -80 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                  className={`flex flex-col ${fromLeft ? "md:items-start md:text-left" : "md:items-end md:text-right"} items-start text-left`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-lg font-bold text-primary-foreground shadow-lg shadow-primary/30">
-                      0{i + 1}
-                    </div>
-                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-secondary)]">
-                      Step {i + 1}
-                    </div>
-                  </div>
-                  <h3 className="mt-5 text-2xl font-semibold sm:text-3xl">{s}</h3>
-                  <div className="mt-3 h-px w-16 bg-gradient-to-r from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)]" />
-                </motion.div>
-              </div>
-            );
-          })}
+      <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+        {/* Sticky image column */}
+        <div className="relative md:sticky md:top-24 md:self-start">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, rotate: -3 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="glass relative aspect-square overflow-hidden rounded-[2rem] p-4 shadow-2xl"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--brand-primary)]/15 via-transparent to-[color:var(--brand-secondary)]/15" />
+            {processImgs.map((img, i) => (
+              <motion.img
+                key={i}
+                src={img.url}
+                alt={steps[i]}
+                loading="lazy"
+                width={1024}
+                height={1024}
+                initial={false}
+                animate={{
+                  opacity: i === active ? 1 : 0,
+                  scale: i === active ? 1 : 1.05,
+                }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute inset-4 h-[calc(100%-2rem)] w-[calc(100%-2rem)] object-contain"
+              />
+            ))}
+            <div className="absolute bottom-4 left-4 flex gap-1.5">
+              {steps.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === active
+                      ? "w-8 bg-gradient-to-r from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)]"
+                      : "w-1.5 bg-white/20"
+                  }`}
+                />
+              ))}
+            </div>
+          </motion.div>
         </div>
+
+        {/* Steps column — reveal one by one */}
+        <ol className="relative flex flex-col gap-6">
+          <div className="pointer-events-none absolute left-7 top-2 h-[calc(100%-1rem)] w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+          {steps.map((s, i) => (
+            <ProcessStep
+              key={s}
+              index={i}
+              label={s}
+              isActive={active === i}
+              onEnter={() => setActive(i)}
+            />
+          ))}
+        </ol>
       </div>
     </Section>
+  );
+}
+
+function ProcessStep({
+  index,
+  label,
+  isActive,
+  onEnter,
+}: {
+  index: number;
+  label: string;
+  isActive: boolean;
+  onEnter: () => void;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  return (
+    <motion.li
+      ref={ref}
+      initial={{ opacity: 0, x: 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: false, margin: "-45% 0px -45% 0px", amount: 0.6 }}
+      onViewportEnter={onEnter}
+      transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.05 }}
+      className={`glass relative flex items-start gap-5 rounded-2xl p-5 transition-all duration-500 ${
+        isActive
+          ? "shadow-xl ring-2 ring-[color:var(--brand-primary)]/50"
+          : "opacity-70"
+      }`}
+    >
+      <div
+        className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-lg font-bold shadow-lg transition-all duration-500 ${
+          isActive
+            ? "bg-gradient-to-br from-[color:var(--brand-primary)] to-[color:var(--brand-secondary)] text-white shadow-primary/40 scale-110"
+            : "bg-primary/10 text-[color:var(--brand-primary)]"
+        }`}
+      >
+        0{index + 1}
+      </div>
+      <div className="flex-1 pt-1">
+        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-secondary)]">
+          Step {index + 1}
+        </div>
+        <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{label}</h3>
+      </div>
+    </motion.li>
   );
 }
 
