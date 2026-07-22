@@ -246,51 +246,6 @@ export function Portfolio() {
   );
 }
 
-export function Testimonials() {
-  const { t } = useI18n();
-  const items = [
-    { name: "Amine B.", biz: "Boutique Casablanca", avatar: a1.url, rating: 5, review: "Site livré rapidement, design premium. Notre chiffre d'affaires a doublé en 3 mois." },
-    { name: "Sofia R.", biz: "Studio Barcelona", avatar: a2.url, rating: 5, review: "Equipo increíble. Nos ayudaron a lanzar campañas que realmente convierten." },
-    { name: "James O.", biz: "Growth Startup", avatar: a3.url, rating: 5, review: "Truly premium execution. Our new site loads instantly and looks world-class." },
-    { name: "Youssef T.", biz: "Restaurant Rabat", avatar: a4.url, rating: 5, review: "Support professionnel du début à la fin, je recommande à 100%." },
-  ];
-  return (
-    <Section id="testimonials" eyebrow={t("testimonials.eyebrow")} title={t("testimonials.title")}>
-      <div className="grid gap-6 md:grid-cols-2">
-        {items.map((it, i) => (
-          <motion.div
-            key={it.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="glass rounded-3xl p-8 shadow-lg"
-          >
-            <div className="flex items-center gap-4">
-              <img
-                src={it.avatar}
-                alt={it.name}
-                loading="lazy"
-                width={512}
-                height={512}
-                className="h-12 w-12 rounded-full object-cover ring-2 ring-white/10"
-              />
-              <div>
-                <div className="font-semibold">{it.name}</div>
-                <div className="text-xs text-muted-foreground">{it.biz}</div>
-              </div>
-              <div className="ml-auto text-[color:var(--brand-accent)]">
-                {"★".repeat(it.rating)}
-              </div>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">"{it.review}"</p>
-          </motion.div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
 export function Stats() {
   const { t } = useI18n();
   const items = [
