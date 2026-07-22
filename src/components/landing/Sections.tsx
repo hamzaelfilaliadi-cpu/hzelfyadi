@@ -6,10 +6,6 @@ import p3Asset from "@/assets/portfolio-3.jpg.asset.json";
 import p4Asset from "@/assets/portfolio-4.jpg.asset.json";
 import p5Asset from "@/assets/portfolio-5.jpg.asset.json";
 import p6Asset from "@/assets/portfolio-6.jpg.asset.json";
-import a1Asset from "@/assets/avatar-1.jpg.asset.json";
-import a2Asset from "@/assets/avatar-2.jpg.asset.json";
-import a3Asset from "@/assets/avatar-3.jpg.asset.json";
-import a4Asset from "@/assets/avatar-4.jpg.asset.json";
 import pr1Asset from "@/assets/process-1.jpg.asset.json";
 import pr2Asset from "@/assets/process-2.jpg.asset.json";
 import pr3Asset from "@/assets/process-3.jpg.asset.json";
@@ -22,10 +18,6 @@ const p3 = p3Asset as { url: string };
 const p4 = p4Asset as { url: string };
 const p5 = p5Asset as { url: string };
 const p6 = p6Asset as { url: string };
-const a1 = a1Asset as { url: string };
-const a2 = a2Asset as { url: string };
-const a3 = a3Asset as { url: string };
-const a4 = a4Asset as { url: string };
 const processImgs = [pr1Asset, pr2Asset, pr3Asset, pr4Asset, pr5Asset, pr6Asset] as { url: string }[];
 
 const fadeUp = {
